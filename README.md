@@ -22,7 +22,40 @@ The used datasets consists of two tables; (1) Customers, And (2) Transcations.
 
 
 ### PHASE-1: Multi-channel Segmentation!
-#### Step 1 - Build a single view! t a customer level - every row will be unique for each customer.  First convert the txn into customer level. Then join the new txn table with the customer table (becuase now both are at the same customer level i.e. unique rows for every cust)
+#### Step 1 - Build a single view! at a customer level - every row will be unique for each customer.  First convert the txn into customer level. Then join the new txn table with the customer table (becuase now both are at the same customer level i.e. unique rows for every cust)
  ```sql
- Select * from cust
+ Create Table txn_online as
+Select * from txn where Home_Shopping_Flg = 1;
+
+
+Create Table txn_instore as
+Select * from txn where Home_Shopping_Flg = 0;
+
+Create table SV as
+Select c.*, coalesce(i.visits,0) as instore_visits,
+coalesce(i.Home_Shopping_Flg,0) as instore_Home_Shopping_Flg,
+coalesce(i.tot_spend,0) as instore_Spends,
+coalesce(o.visits,0) as online_visits,
+coalesce(o.Home_Shopping_Flg,0) as online_Home_Shopping_Flg,
+coalesce(o.tot_spend,0) as online_Spends
+from Cust c
+Left Join txn_instore i
+on i.household_id = c.household_id
+Left Join txn_online o
+on o.household_id = c.household_id;
+
  ```
+ 
+ #### Step 2 - Multichannel Segementation
+ 
+ # Segmentation definition
+ ```sql
+Create Table SV2 as
+Select *,
+(Case when instore_visits > 0 AND online_visits > 0 Then 'Multichannel'
+	  when instore_visits > 0 AND online_visits = 0 Then 'InstoreOnly'
+      when instore_visits = 0 AND online_visits > 0 Then 'OnlineOnly'
+      when instore_visits = 0 AND online_visits = 0 Then 'NoShopping'
+      END) as channel_seg
+ from SV;
+```
