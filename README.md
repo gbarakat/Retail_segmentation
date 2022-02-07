@@ -16,6 +16,11 @@ The purpose of the project is to give a quantitative understanding of some of th
 
 
 ## Project Implementation
+### Deep Look into the used data set:
+    The used datasets consists of two tables; (1) Customers, And (2) Transcations. <img width="675" alt="image" src="https://user-images.githubusercontent.com/49054741/152719872-31924a87-847b-4ace-8143-73d6957784f6.png">
+
+### PHASE-1: Multi-channel Segmentation!
+#### Step 1 - Build a single view! t a customer level - every row will be unique for each customer.  First convert the txn into customer level. Then join the new txn table with the customer table (becuase now both are at the same customer level i.e. unique rows for every cust)
  ```sql
  Select * from cust
  ```
