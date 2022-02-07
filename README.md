@@ -1,4 +1,4 @@
-# Retail_segmentation
+# Retail segmentation
 Customer segmentation project using SQL.
 
 
