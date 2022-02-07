@@ -45,7 +45,8 @@ Left Join txn_online o
 on o.household_id = c.household_id;
 
  ```
- 
+ <img width="1063" alt="image" src="https://user-images.githubusercontent.com/49054741/152720291-d05073e2-4126-4b27-861c-669616e8b74a.png">
+
  #### Step 2 - Multichannel Segementation
  
  # Segmentation definition
