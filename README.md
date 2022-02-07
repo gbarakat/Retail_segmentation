@@ -76,3 +76,6 @@ Group by channel_seg;
 
 <img width="667" alt="image" src="https://user-images.githubusercontent.com/49054741/152721262-f27e2b78-506b-4a22-8de8-5a08a20102f6.png">
 
+Key Insight 1 Multi Channel customers are the highest in both average online and instore spending.
+Recommendation 1: Company Should build strategy to help customers migrate to multi shopping.
+
