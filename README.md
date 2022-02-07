@@ -50,6 +50,7 @@ on o.household_id = c.household_id;
  #### Step 2 - Multichannel Segementation
  
  # Segmentation definition
+ Classifying the customers according to there favorite shopping channel into 4 channels: Multichannel, Istore only, Online only and No shopping. This classification is built based on the total number of online and instores visits 
  ```sql
 Create Table SV2 as
 Select *,
