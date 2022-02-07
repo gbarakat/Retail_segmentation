@@ -63,7 +63,7 @@ Select *,
 ```
 
 ##### Segmentation profiling
-After classifying the customers into well defined segments, it would be useful to explore these categories before moving on with the classification. 
+After classifying the customers into well defined segments, it would be useful to do some sort of exploration based on the peferred purchase format and loyality degree. 
 ```sql
 Select channel_seg,
  round(avg(instore_visits)) as avg_instore_visits,
@@ -76,6 +76,22 @@ Group by channel_seg;
 
 <img width="667" alt="image" src="https://user-images.githubusercontent.com/49054741/152721262-f27e2b78-506b-4a22-8de8-5a08a20102f6.png">
 
-Key Insight 1 Multi Channel customers are the highest in both average online and instore spending.
-Recommendation 1: Company Should build strategy to help customers migrate to multi shopping.
+**Key Insight 1** Multi Channel customers are the highest in both average online and instore spending.
 
+**Recommendation 1:** Company Should build strategy to help customers migrate to multi shopping.
+
+```sql
+Select channel_seg,count(1) as Count_shoppers,
+concat(cast(round(100*Sum((case when loyalty = 'Very Frequent Shoppers' then 1 else 0 end))/count(1))as char), "%") as Sum_VeryFrequentShoppes,
+concat(cast(round(100*Sum((case when loyalty = 'Occasional Shoppers' then 1 else 0 end))/count(1))as char), "%") as Sum_OccasionalShoppes,
+concat(cast(round(100*Sum((case when loyalty = 'Lapsing Shoppers' then 1 else 0 end))/count(1))as char), "%") as Sum_LapsingShoppes,
+concat(cast(round(100*Sum((case when loyalty = 'No longer Shopping' then 1 else 0 end))/count(1))as char), "%") as Sum_NoLongerShoppes
+from sv2
+group by channel_seg;
+```
+
+<img width="959" alt="image" src="https://user-images.githubusercontent.com/49054741/152721758-a5b435d7-5125-44bd-92a6-93f6307498f0.png">
+
+**key Insights 2** nearly 80% of the Multi channel Shoppers are very Frequent Shoppers, for instore only shoppers almost 40% (2000+ Customers) are Occasional Shoppers.
+
+**Recommendation 2:** The Company should build strategy to migrate Instore Occasional Shoppers to Online, That way even if we are able to migrate 10% of them to Very Frequent Shoppers We will get additional 200 Customers in multichannel. There by growing by 50%.
