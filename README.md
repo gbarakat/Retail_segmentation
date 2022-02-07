@@ -17,7 +17,7 @@ The purpose of the project is to give a quantitative understanding of some of th
 
 ## Project Implementation
 ### Deep Look into the used data set:
-    The used datasets consists of two tables; (1) Customers, And (2) Transcations. 
+The used datasets consists of two tables; (1) Customers, And (2) Transcations. 
    <img width="675" alt="image" src="https://user-images.githubusercontent.com/49054741/152719909-79e82f0c-7215-4d7e-a499-e81c15699dd3.png">
 
 
