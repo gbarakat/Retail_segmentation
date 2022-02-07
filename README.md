@@ -49,7 +49,7 @@ on o.household_id = c.household_id;
 
  #### Step 2 - Multichannel Segementation
  
- # Segmentation definition
+ ##### Segmentation definition
  Classifying the customers according to there favorite shopping channel into 4 channels: Multichannel, Istore only, Online only and No shopping. This classification is built based on the total number of online and instores visits 
  ```sql
 Create Table SV2 as
@@ -61,3 +61,18 @@ Select *,
       END) as channel_seg
  from SV;
 ```
+
+##### Segmentation profiling
+After classifying the customers into well defined segments, it would be useful to explore these categories before moving on with the classification. 
+```sql
+Select channel_seg,
+ round(avg(instore_visits)) as avg_instore_visits,
+ round(AVG(instore_Spends)) as avg_instore_Spends,
+ round(avg(online_visits)) as avg_online_visits,
+ round(AVG(online_Spends)) as avg_online_Spends
+from SV2
+Group by channel_seg;
+```
+
+<img width="667" alt="image" src="https://user-images.githubusercontent.com/49054741/152721262-f27e2b78-506b-4a22-8de8-5a08a20102f6.png">
+
