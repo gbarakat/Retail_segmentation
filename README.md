@@ -89,9 +89,21 @@ concat(cast(round(100*Sum((case when loyalty = 'No longer Shopping' then 1 else 
 from sv2
 group by channel_seg;
 ```
-
-<img width="959" alt="image" src="https://user-images.githubusercontent.com/49054741/152721758-a5b435d7-5125-44bd-92a6-93f6307498f0.png">
+<img width="1070" alt="image" src="https://user-images.githubusercontent.com/49054741/164071622-5359607d-d5d3-40bf-abed-613eeac2c89b.png">
 
 **key Insights 2** nearly 80% of the Multi channel Shoppers are very Frequent Shoppers, for instore only shoppers almost 40% (2000+ Customers) are Occasional Shoppers.
 
 **Recommendation 2:** The Company should build strategy to migrate Instore Occasional Shoppers to Online, That way even if we are able to migrate 10% of them to Very Frequent Shoppers We will get additional 200 Customers in multichannel. There by growing by 50%.
+
+```sql
+select distinct lifestyle from sv2;
+select channel_seg, count(1) as Count_Shoppers,
+					concat(cast(round(100*sum(case when lifestyle = 'Very Affluent Customers' then 1 else 0 end)/count(1)) as char), "%") as Count_VeryAffluent,
+					concat(cast(round(100*sum(case when lifestyle = 'Middle Class' then 1 else 0 end)/count(1)) as char), "%") as Count_MiddleClass,
+                    concat(cast(round(100*sum(case when lifestyle = 'Low Affluent Customers' then 1 else 0 end)/count(1)) as char), "%") as Count_LowAffluent
+from sv2 group by channel_seg;
+```
+<img width="1070" alt="image" src="https://user-images.githubusercontent.com/49054741/164071862-b36f4e7c-ac02-4602-a381-61dc508c0fa7.png">
+
+*** Key Insight 4 - Only one-fourth of Multichannel shoppers are Low Affluent. Where as instore we have more then one third. 
+*** Recommendation 4 - So when we are thinking of migrating instore shoppers to multichannel it might be prudent to start with affluent shoppers.
